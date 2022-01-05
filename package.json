@@ -1,0 +1,14 @@
+{
+  "name": "tests-js",
+  "version": "1.0.0",
+  "description": "Only to study tests",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "jest": "^27.4.5"
+  }
+}
