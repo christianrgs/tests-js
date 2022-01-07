@@ -1,4 +1,4 @@
-const { sum } = require('./calculator')
+import { sum } from './calculator'
 
 describe('calculator', () => {
   it('should sum 2 to 2 and the result must be 4', () => {

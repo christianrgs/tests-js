@@ -18,7 +18,7 @@ const stringToKeyAndValue = query => {
   return [key, value]
 }
 
-module.exports.queryString = obj => {
+export function queryString(obj) {
   const entries = Object.entries(obj)
   const mappedQueries = entries.map(keyAndValueToString)
   const queryString = mappedQueries.join('&')
@@ -26,7 +26,7 @@ module.exports.queryString = obj => {
   return queryString
 }
 
-module.exports.parse = string => {
+export function parse(string) {
   const queries = string.split('&')
   const objEntriesFromQueries = queries.map(stringToKeyAndValue)
   const parsedQueries = Object.fromEntries(objEntriesFromQueries)
