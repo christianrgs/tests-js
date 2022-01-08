@@ -69,4 +69,17 @@ describe('Cart', () => {
       expect(cart.getTotal()).toBe(0)
     })
   })
+
+  describe('special conditions', () => {
+    it('should calculate the discount when a minimum quantity condition is passed', () => {
+      const condition = {
+        percentage: 30,
+        minimum: 2
+      }
+
+      cart.add({ sku, condition, quantity: 3 })
+
+      expect(cart.getTotal()).toBe(74315)
+    })
+  })
 })
