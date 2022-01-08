@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cart checkout should return an object with the list of items and the total 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "quantity": 2,
+      "sku": Object {
+        "id": "123",
+        "price": 35388,
+      },
+    },
+    Object {
+      "quantity": 1,
+      "sku": Object {
+        "id": "321",
+        "price": 41872,
+      },
+    },
+  ],
+  "total": 112648,
+}
+`;
+
+exports[`Cart getSummary should return an object with the list of items and the total 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "quantity": 2,
+      "sku": Object {
+        "id": "123",
+        "price": 35388,
+      },
+    },
+    Object {
+      "quantity": 1,
+      "sku": Object {
+        "id": "321",
+        "price": 41872,
+      },
+    },
+  ],
+  "total": 112648,
+}
+`;
