@@ -24,14 +24,14 @@ const calculateQuantityDiscount = ({ amount, quantity, condition }) => {
   return Money({ amount: 0 })
 }
 
-const calculateDiscount = (amount, item) => {
-  const conditionsList = Array.isArray(item.condition) ? item.condition : [item.condition]
+const calculateDiscount = (amount, { condition, quantity }) => {
+  const conditionsList = Array.isArray(condition) ? condition : [condition]
 
-  const discounts = conditionsList.map(condition => {
-    if (condition.percentage) {
-      return calculatePercentageDiscount({ amount, quantity: item.quantity, condition }).getAmount()
-    } else if (condition.quantity) {
-      return calculateQuantityDiscount({ amount, quantity: item.quantity, condition }).getAmount()
+  const discounts = conditionsList.map(mapCondition => {
+    if (mapCondition.percentage) {
+      return calculatePercentageDiscount({ amount, quantity, condition: mapCondition }).getAmount()
+    } else if (mapCondition.quantity) {
+      return calculateQuantityDiscount({ amount, quantity, condition: mapCondition }).getAmount()
     }
   })
 
@@ -90,11 +90,13 @@ export default class Cart {
 
   getSummary() {
     const total = this.getTotal()
+    const formatted = Money({ amount: total }).toFormat()
     const items = this.items
 
     return {
       items,
-      total
+      total,
+      formatted
     }
   }
 

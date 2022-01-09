@@ -24,6 +24,7 @@ Object {
 
 exports[`Cart getSummary should return an object with the list of items and the total 1`] = `
 Object {
+  "formatted": "R$1,126.48",
   "items": Array [
     Object {
       "quantity": 2,

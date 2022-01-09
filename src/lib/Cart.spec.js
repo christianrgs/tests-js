@@ -51,6 +51,13 @@ describe('Cart', () => {
       expect(cart.getSummary()).toMatchSnapshot()
       expect(cart.getTotal()).toBeGreaterThan(0)
     })
+
+    it('should return formatted total', () => {
+      cart.add({ sku, quantity: 2 })
+      cart.add({ sku: sku2, quantity: 1 })
+
+      expect(cart.getSummary().formatted).toBe('R$1,126.48')
+    })
   })
 
   describe('checkout', () => {
@@ -135,7 +142,7 @@ describe('Cart', () => {
       expect(cart.getTotal()).toBe(35388)
     })
 
-    it('should receive two or more conditions and apply the best discount', () => {
+    it('should receive two or more conditions and apply the best discount. First case', () => {
       const percentageCondition = {
         percentage: 30,
         minimum: 2
@@ -148,6 +155,21 @@ describe('Cart', () => {
       cart.add({ sku, condition: [percentageCondition, quantityCondition], quantity: 5 })
 
       expect(cart.getTotal()).toBe(106164)
+    })
+
+    it('should receive two or more conditions and apply the best discount. Second case', () => {
+      const percentageCondition = {
+        percentage: 70,
+        minimum: 4
+      }
+
+      const quantityCondition = {
+        quantity: 2
+      }
+
+      cart.add({ sku, condition: [percentageCondition, quantityCondition], quantity: 5 })
+
+      expect(cart.getTotal()).toBe(53082)
     })
   })
 })
