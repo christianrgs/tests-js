@@ -71,7 +71,7 @@ describe('Cart', () => {
   })
 
   describe('special conditions', () => {
-    it('should calculate the discount when a minimum quantity condition is passed', () => {
+    it('should apply the discount when the quantity is above the minimum quantity passed in the condition', () => {
       const condition = {
         percentage: 30,
         minimum: 2
@@ -80,6 +80,74 @@ describe('Cart', () => {
       cart.add({ sku, condition, quantity: 3 })
 
       expect(cart.getTotal()).toBe(74315)
+    })
+
+    it('should not apply the discount when the quantity is below or equal the minimum quantity passed in the condition', () => {
+      const condition = {
+        percentage: 30,
+        minimum: 2
+      }
+
+      cart.add({ sku, condition, quantity: 2 })
+
+      expect(cart.getTotal()).toBe(70776)
+
+      cart.checkout()
+
+      cart.add({ sku, condition, quantity: 1 })
+
+      expect(cart.getTotal()).toBe(35388)
+    })
+
+    it('should apply quantity discount for even quantities', () => {
+      const condition = {
+        quantity: 2
+      }
+
+      cart.add({ sku, condition, quantity: 4 })
+
+      expect(cart.getTotal()).toBe(70776)
+    })
+
+    it('should apply quantity discount for odd quantities', () => {
+      const condition = {
+        quantity: 2
+      }
+
+      cart.add({ sku, condition, quantity: 5 })
+
+      expect(cart.getTotal()).toBe(106164)
+    })
+
+    it('should not apply quantity discount when the quantity is below or equal the minimum quantity passed in the condition', () => {
+      const condition = {
+        quantity: 2
+      }
+
+      cart.add({ sku, condition, quantity: 2 })
+
+      expect(cart.getTotal()).toBe(70776)
+
+      cart.checkout()
+
+      cart.add({ sku, condition, quantity: 1 })
+
+      expect(cart.getTotal()).toBe(35388)
+    })
+
+    it('should receive two or more conditions and apply the best discount', () => {
+      const percentageCondition = {
+        percentage: 30,
+        minimum: 2
+      }
+
+      const quantityCondition = {
+        quantity: 2
+      }
+
+      cart.add({ sku, condition: [percentageCondition, quantityCondition], quantity: 5 })
+
+      expect(cart.getTotal()).toBe(106164)
     })
   })
 })
