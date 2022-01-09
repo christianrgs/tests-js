@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:debug": "ndb jest"
   },
   "license": "ISC",
   "dependencies": {
@@ -19,6 +20,7 @@
     "@types/jest": "^27.4.0",
     "babel-jest": "^27.4.6",
     "jest": "^27.4.5",
+    "ndb": "^1.1.5",
     "prettier": "2.5.1"
   }
 }
